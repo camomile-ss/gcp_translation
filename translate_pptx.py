@@ -14,14 +14,12 @@ if __name__ == "__main__":
 
     prs = Presentation(args.infn)
 
-    # with open("test_out.txt", "w", encoding="utf-8") as f:
     for i, sld in enumerate(prs.slides):  # , start=1):
         print(f"-- {i} --")
         for shp in sld.shapes:
             if shp.has_text_frame:
                 texts = shp.text.split("\n")
                 texts_jp = gcp_translate_texts(texts)
-                # f.write("\n".join(texts_jp) + "\n")
                 shp.text = "\n".join(texts_jp)
 
     prs.save(args.outfn)
